@@ -14,6 +14,9 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  
 }
 
 body {
@@ -22,6 +25,10 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url(/img/Background.jpg);
+  background-size: cover;
+  background-position: center;
+  align-content: center;
 }
 
 * {
@@ -38,5 +45,117 @@ a {
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
+  }
+}
+
+.gridContainer {
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);   /* 3 columnas */
+  grid-template-rows: repeat(2, 1fr);      /* 2 filas, cada fila ocupa igual fracción */
+  height: 90vh;            /* que el grid ocupe toda la altura de la ventana */
+  box-sizing: border-box;
+  width: 50vw;
+  justify-content: center;   /* para que el padding no “salga” de la altura */
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* altura automática por el grid-row track, así que no pongas height:100% aquí */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  cursor: pointer;
+
+}
+.cardTitle {
+  font-size: 24px;
+  margin: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  color: #FFE81F; /* amarillo Star Wars */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transform: perspective(300px) rotateX(40deg) translateZ(-20px);
+  /* efecto “inclinación” pero sin moverlo luego */
+}
+
+.card:hover .cardTitle {
+  opacity: 1;
+  
+}
+
+.cardText {
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  color: #FFE81F;
+  transform: perspective(300px) rotateX(40deg) translateZ(-20px);
+}
+
+.card:hover .cardText {
+  opacity: 1;
+  
+}
+
+
+
+@media (max-width: 800px) {
+  .gridContainer {
+    grid-template-columns: repeat(1, 1fr); /* 1 columna en pantallas pequeñas */
+    grid-template-rows: repeat(6, 1fr);    /* 6 filas, cada fila ocupa igual fracción */
+    width: 100vw;
+    height: 600vh; /* altura automática para que se ajuste al contenido */
+  }
+
+  .card {
+    background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  }
+
+  .cardTitle{
+    width: 70%;
+  }
+
+  .cardText {
+    width: 70%;
+    text-align: center;
+  }
+
+  .card:hover .cardText {
+  opacity: 1;
+}
+
+.card:hover .cardTitle {
+  opacity: 1;
+}
+}
+
+.cardContent {
+    animation: crawlUp 4s linear forwards; /* 4 segundos, uniforme, mantiene el estado final */
+
+}
+
+/* animación de ‘crawl’ */
+@keyframes crawlUp {
+  0% {
+    bottom: -100%;             /* parte desde totalmente abajo */
+    transform: rotateX(20deg) translateZ(0);
+  }
+  100% {
+    bottom: 100%;              /* termina arriba, fuera de la card */
+    transform: rotateX(0deg) translateZ(0);
   }
 }
