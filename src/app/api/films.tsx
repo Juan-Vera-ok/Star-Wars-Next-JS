@@ -15,4 +15,12 @@ async function getFilms(): Promise<Film[]> {
   }))
 }
 
-export { getFilms };
+
+async function getCharactersFromFilm(filmId: string): Promise<any[]> {
+  const res = await fetch(`https://swapi.dev/api/films/${filmId}`, { next: { revalidate: 60 } })
+  if (!res.ok) throw new Error('Failed to fetch characters')
+  const data = await res.json()
+  return data.characters || []
+}
+
+export { getFilms, getCharactersFromFilm };

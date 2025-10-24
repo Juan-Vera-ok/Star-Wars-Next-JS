@@ -1,13 +1,15 @@
-import Posts from '@/app/ui/post'
+import Films from '@/app/ui/films'
 import { Suspense } from 'react'
- import {getFilms} from '@/app/api/films'
+ import {getCharactersFromFilm, getFilms} from '@/app/api/films'
+import Characters from './characters/page'
 export default function Page() {
   // Don't await the data fetching function
-  const posts = getFilms()
- 
+  const films = getFilms()
+  const characters = getCharactersFromFilm("1");
+  console.log(characters.then(data => console.log(data)))
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Posts posts={posts} />
+      <Films films={films} />
     </Suspense>
   )
 }

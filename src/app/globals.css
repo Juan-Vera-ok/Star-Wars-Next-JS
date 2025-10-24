@@ -71,14 +71,14 @@ a {
   flex-direction: column;
   justify-content: flex-end;
   padding: 16px;
-  cursor: pointer;
-
+  width: 100%;
+  height: 100%;
 }
 .cardTitle {
   font-size: 24px;
   margin: 0;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  text-align: center;
+    justify-content: center;
   color: #FFE81F; /* amarillo Star Wars */
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -86,22 +86,80 @@ a {
   /* efecto “inclinación” pero sin moverlo luego */
 }
 
-.card:hover .cardTitle {
-  opacity: 1;
+.link{
   
 }
 
 .cardText {
-  font-size: 12px;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  text-align: center;
+    justify-content: center;
+  font-size: 22px;
   color: #FFE81F;
   transform: perspective(300px) rotateX(40deg) translateZ(-20px);
+} 
+
+.image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+    transition: opacity 1s ease; /* para suavizar el “apagado” */
 }
 
-.card:hover .cardText {
+.card:hover .image {
+  opacity: 0; /* se apaga la imagen al hover del .card */
+}
+
+.cardContentContainer {
+  perspective: 400px;
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+
+.cardContent {
+  opacity: 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transform-origin: 50% 100%;
+}
+.card:hover .cardContent {
+  animation: moveIn 40s linear forwards;
   opacity: 1;
-  
+}
+
+
+
+@keyframes fadeOut {
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes moveIn {
+  0% {
+    transform: rotateX(30deg) translateZ(100px) translateY(100%);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateX(30deg) translateZ(-500px) translateY(-200%);
+    opacity: 0.5;
+  }
 }
 
 
@@ -126,36 +184,21 @@ a {
   }
 
   .cardTitle{
+    text-align: center;
     width: 70%;
+    justify-content: center;
   }
 
   .cardText {
     width: 70%;
     text-align: center;
+    justify-content: center;
   }
 
-  .card:hover .cardText {
+  .card:hover .cardContent {
+  animation: moveIn 40s linear forwards;
   opacity: 1;
 }
 
-.card:hover .cardTitle {
-  opacity: 1;
-}
-}
 
-.cardContent {
-    animation: crawlUp 4s linear forwards; /* 4 segundos, uniforme, mantiene el estado final */
-
-}
-
-/* animación de ‘crawl’ */
-@keyframes crawlUp {
-  0% {
-    bottom: -100%;             /* parte desde totalmente abajo */
-    transform: rotateX(20deg) translateZ(0);
-  }
-  100% {
-    bottom: 100%;              /* termina arriba, fuera de la card */
-    transform: rotateX(0deg) translateZ(0);
-  }
 }
