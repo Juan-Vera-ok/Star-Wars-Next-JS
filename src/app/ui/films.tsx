@@ -18,7 +18,7 @@ export default function films({
     <div className='gridContainer'
     >
       {allfilms.map(films => (
-        <Link key={films.id} className="link" href={`/characters`}>
+        <Link key={films.id} className="link" href={`/characters/${films.id}`}>
           <div
             key={films.id}
             className="card"

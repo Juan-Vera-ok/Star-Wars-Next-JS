@@ -23,4 +23,48 @@ async function getCharactersFromFilm(filmId: string): Promise<any[]> {
   return data.characters || []
 }
 
-export { getFilms, getCharactersFromFilm };
+interface Character {
+  name: string;
+  url: string;
+}
+
+async function getCharacters(urls: string[]): Promise<Character[]> {
+  const characters = await Promise.all(urls.map(async (url) => {
+    const res = await fetch(url, { next: { revalidate: 60 } })
+    if (!res.ok) throw new Error('Failed to fetch characters')
+    const data = await res.json()
+
+    return data
+  }))
+  return characters
+}
+
+function extractIdFromUrl(url: string): number | null {
+  try {
+    const match = url.match(/\/(\d+)\/?$/);
+    if (!match) {
+      return null;
+    }
+    return parseInt(match[1], 10);
+  } catch {
+    return null;
+  }
+}
+
+async function getCharactersImage(character:string[]): Promise<string | null> {
+
+  const charactersImage = await Promise.all(character.map(async (char) => {
+    const id = extractIdFromUrl(char);
+    if (id === null) {
+      return null;
+    }
+    const res = await fetch(`https://akabab.github.io/starwars-api/api/id/${id}.json`, { next: { revalidate: 60 } })
+    if (!res.ok) throw new Error('Fail to fetch character image')
+    const data = await res.json()
+    return data.image
+  }));
+
+  return charactersImage[0] || null;
+}
+
+export { getFilms, getCharactersFromFilm,getCharacters,getCharactersImage };

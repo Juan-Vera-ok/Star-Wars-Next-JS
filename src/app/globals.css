@@ -162,7 +162,44 @@ a {
   }
 }
 
+.characterImage{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
 
+.characterName{
+  font-size: 24px;
+  margin: 0;
+  text-align: center;
+    justify-content: center;
+  color: #FFE81F; /* amarillo Star Wars */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transform: perspective(300px) rotateX(40deg) translateZ(-20px);
+}
+
+.gridCharacters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 3fr;
+  margin-bottom: 24px;
+  max-width: 100vw;
+  max-height: 100vh;
+}
+
+.cardCharacter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.cardCharacter:hover {
+  transform: scale(1.5);
+  transition: transform 0.3s ease;
+}
 
 @media (max-width: 800px) {
   .gridContainer {
@@ -195,10 +232,79 @@ a {
     justify-content: center;
   }
 
-  .card:hover .cardContent {
+  .card:hover .cardContent,
+.card:active .cardContent {
   animation: moveIn 40s linear forwards;
   opacity: 1;
 }
 
 
+}
+
+/* Tablet / pantallas medianas */
+@media (max-width: 1024px) {
+  .gridContainer {
+    width: 90vw;
+    height: auto;
+    grid-template-columns: repeat(2, 1fr);   /* 2 columnas en lugar de 3 */
+    grid-template-rows: auto;
+    gap: 16px;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  .cardTitle {
+    font-size: 20px;
+  }
+
+  .cardText {
+    font-size: 18px;
+  }
+}
+
+/* Móvil / pantallas pequeñas */
+@media (max-width: 600px) {
+  .gridContainer {
+    width: 100vw;
+    height: 100vh;
+    grid-template-columns: 1fr;              /* 1 columna */
+    grid-template-rows: auto;
+    gap: 12px;
+    padding: 0 8px;
+  }
+
+  .card {
+    padding: 10px;
+    height: 100vh;  /* que la altura se adapte porque imagen + texto pueden necesitar más */
+  }
+
+  .cardTitle {
+    font-size: 18px;
+  }
+
+  .cardText {
+    font-size: 16px;
+  }
+}
+
+@media (hover: hover) {
+  /* dispositivos que soportan hover, PC por ejemplo */
+  .card:hover .cardContent {
+    animation: moveIn 40s linear forwards;
+    opacity: 1;
+  }
+}
+
+@media (hover: none) {
+  /* dispositivos táctiles que NO tienen hover habitual */
+  .card .cardContent {
+   animation: 20 s linear forwards;
+  }
+
+  .card:active .cardContent {
+    animation: moveIn 40s linear forwards;
+    opacity: 1;
+  }
 }
