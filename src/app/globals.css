@@ -16,7 +16,6 @@ body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
-  
 }
 
 body {
@@ -51,12 +50,12 @@ a {
 .gridContainer {
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);   /* 3 columnas */
-  grid-template-rows: repeat(2, 1fr);      /* 2 filas, cada fila ocupa igual fracción */
-  height: 90vh;            /* que el grid ocupe toda la altura de la ventana */
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  height: 90vh;
   box-sizing: border-box;
   width: 50vw;
-  justify-content: center;   /* para que el padding no “salga” de la altura */
+  justify-content: center;
 }
 
 .card {
@@ -65,7 +64,6 @@ a {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  /* altura automática por el grid-row track, así que no pongas height:100% aquí */
   color: white;
   display: flex;
   flex-direction: column;
@@ -73,17 +71,19 @@ a {
   padding: 16px;
   width: 100%;
   height: 100%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
+
 .cardTitle {
   font-size: 24px;
   margin: 0;
   text-align: center;
-    justify-content: center;
-  color: #FFE81F; /* amarillo Star Wars */
+  justify-content: center;
+  color: #FFE81F;
   text-transform: uppercase;
   letter-spacing: 2px;
   transform: perspective(300px) rotateX(40deg) translateZ(-20px);
-  /* efecto “inclinación” pero sin moverlo luego */
 }
 
 .link{
@@ -92,7 +92,7 @@ a {
 
 .cardText {
   text-align: center;
-    justify-content: center;
+  justify-content: center;
   font-size: 22px;
   color: #FFE81F;
   transform: perspective(300px) rotateX(40deg) translateZ(-20px);
@@ -105,11 +105,13 @@ a {
   position: absolute;
   bottom: 0;
   left: 0;
-    transition: opacity 1s ease; /* para suavizar el “apagado” */
+  transition: opacity 1s ease;
 }
 
-.card:hover .image {
-  opacity: 0; /* se apaga la imagen al hover del .card */
+.card:hover .image,
+.card:active .image,
+.card:focus .image {
+  opacity: 0;
 }
 
 .cardContentContainer {
@@ -126,13 +128,15 @@ a {
   bottom: 0;
   width: 100%;
   transform-origin: 50% 100%;
+  transition: opacity 0.3s ease;
 }
-.card:hover .cardContent {
+
+.card:hover .cardContent,
+.card:active .cardContent,
+.card:focus .cardContent {
   animation: moveIn 40s linear forwards;
   opacity: 1;
 }
-
-
 
 @keyframes fadeOut {
   0%{
@@ -151,6 +155,7 @@ a {
     opacity: 1;
   }
 }
+
 @keyframes moveIn {
   0% {
     transform: rotateX(30deg) translateZ(100px) translateY(100%);
@@ -172,8 +177,8 @@ a {
   font-size: 24px;
   margin: 0;
   text-align: center;
-    justify-content: center;
-  color: #FFE81F; /* amarillo Star Wars */
+  justify-content: center;
+  color: #FFE81F;
   text-transform: uppercase;
   letter-spacing: 2px;
   transform: perspective(300px) rotateX(40deg) translateZ(-20px);
@@ -201,23 +206,24 @@ a {
   transition: transform 0.3s ease;
 }
 
+/* Media Queries para tablets y móviles */
 @media (max-width: 800px) {
   .gridContainer {
-    grid-template-columns: repeat(1, 1fr); /* 1 columna en pantallas pequeñas */
-    grid-template-rows: repeat(6, 1fr);    /* 6 filas, cada fila ocupa igual fracción */
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(6, 1fr);
     width: 100vw;
-    height: 600vh; /* altura automática para que se ajuste al contenido */
+    height: 600vh;
   }
 
   .card {
     background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
   }
 
   .cardTitle{
@@ -233,12 +239,11 @@ a {
   }
 
   .card:hover .cardContent,
-.card:active .cardContent {
-  animation: moveIn 40s linear forwards;
-  opacity: 1;
-}
-
-
+  .card:active .cardContent,
+  .card:focus .cardContent {
+    animation: moveIn 40s linear forwards;
+    opacity: 1;
+  }
 }
 
 /* Tablet / pantallas medianas */
@@ -246,7 +251,7 @@ a {
   .gridContainer {
     width: 90vw;
     height: auto;
-    grid-template-columns: repeat(2, 1fr);   /* 2 columnas en lugar de 3 */
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
     gap: 16px;
   }
@@ -262,6 +267,14 @@ a {
   .cardText {
     font-size: 18px;
   }
+
+  /* Animación optimizada para tablets */
+  .card:hover .cardContent,
+  .card:active .cardContent,
+  .card:focus .cardContent {
+    animation: moveIn 40s linear forwards;
+    opacity: 1;
+  }
 }
 
 /* Móvil / pantallas pequeñas */
@@ -269,7 +282,7 @@ a {
   .gridContainer {
     width: 100vw;
     height: 100vh;
-    grid-template-columns: 1fr;              /* 1 columna */
+    grid-template-columns: 1fr;
     grid-template-rows: auto;
     gap: 12px;
     padding: 0 8px;
@@ -277,7 +290,7 @@ a {
 
   .card {
     padding: 10px;
-    height: 100vh;  /* que la altura se adapte porque imagen + texto pueden necesitar más */
+    height: 100vh;
   }
 
   .cardTitle {
@@ -287,24 +300,61 @@ a {
   .cardText {
     font-size: 16px;
   }
-}
 
-@media (hover: hover) {
-  /* dispositivos que soportan hover, PC por ejemplo */
-  .card:hover .cardContent {
+  .card:hover .cardContent,
+  .card:active .cardContent,
+  .card:focus .cardContent {
     animation: moveIn 40s linear forwards;
     opacity: 1;
   }
 }
 
+/* Media Queries específicos para dispositivos táctiles */
 @media (hover: none) {
-  /* dispositivos táctiles que NO tienen hover habitual */
-  .card .cardContent {
-   animation: 20 s linear forwards;
-  }
-
-  .card:active .cardContent {
+  .card:active .cardContent,
+  .card:focus .cardContent {
     animation: moveIn 40s linear forwards;
     opacity: 1;
   }
+  
+  .card:active .image,
+  .card:focus .image {
+    opacity: 0;
+  }
+  
+  .card {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .cardContent {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
 }
+
+/* Optimización adicional para tablets */
+@media (max-width: 1024px) and (hover: none) {
+  .card:hover .cardContent,
+  .card:active .cardContent,
+  .card:focus .cardContent {
+    animation: moveIn 40s linear forwards;
+    opacity: 1;
+  }
+  
+  /* Animación más rápida para móviles si lo prefieres */
+  @keyframes moveInMobile {
+    0% {
+      transform: rotateX(20deg) translateZ(80px) translateY(100%);
+      opacity: 1;
+    }
+    100% {
+      transform: rotateX(20deg) translateZ(-300px) translateY(-150%);
+      opacity: 0.5;
+    }
+  }
+  
+  .card:active .cardContent,
+  .card:focus .cardContent {
+    animation: moveInMobile 30s linear forwards;
+  }}
