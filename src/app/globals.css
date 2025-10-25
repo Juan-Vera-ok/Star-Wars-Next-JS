@@ -256,6 +256,11 @@ a {
     transform-origin: 50% 100%;
     transition: opacity 0.3s ease;
     z-index: 99999;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 
@@ -302,6 +307,11 @@ a {
     transform-origin: 50% 100%;
     transition: opacity 0.3s ease;
     z-index: 99999;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 
   }
 }
@@ -351,6 +361,11 @@ a {
     transform-origin: 50% 100%;
     transition: opacity 0.3s ease;
     z-index: 99999;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 
   }
 }
