@@ -80,25 +80,24 @@ a {
   margin: 0;
   text-align: center;
   justify-content: center;
-  color: #FFE81F;
+  color: #ffe81f;
   text-transform: uppercase;
   letter-spacing: 2px;
   transform: perspective(300px) rotateX(40deg) translateZ(-20px);
 }
 
-.link{
-  
+.link {
 }
 
 .cardText {
   text-align: center;
   justify-content: center;
   font-size: 22px;
-  color: #FFE81F;
+  color: #ffe81f;
   transform: perspective(300px) rotateX(40deg) translateZ(-20px);
-} 
+}
 
-.image{
+.image {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -108,14 +107,13 @@ a {
   transition: opacity 1s ease;
 }
 
-.card:hover .image,
-.card:active .image,
-.card:focus .image {
+/* REGLA PRINCIPAL - funciona en todas las resoluciones */
+.card:hover .image {
   opacity: 0;
 }
 
 .cardContentContainer {
-  perspective: 400px;
+  perspective: 800px;
   transform-style: preserve-3d;
   position: relative;
   overflow: hidden;
@@ -131,18 +129,17 @@ a {
   transition: opacity 0.3s ease;
 }
 
-.card:hover .cardContent,
-.card:active .cardContent,
-.card:focus .cardContent {
+/* REGLA PRINCIPAL - funciona en todas las resoluciones */
+.card:hover .cardContent {
   animation: moveIn 40s linear forwards;
   opacity: 1;
 }
 
 @keyframes fadeOut {
-  0%{
+  0% {
     opacity: 1;
   }
-  100%{
+  100% {
     opacity: 0;
   }
 }
@@ -163,22 +160,22 @@ a {
   }
   100% {
     transform: rotateX(30deg) translateZ(-500px) translateY(-200%);
-    opacity: 0.5;
+    opacity: 1;
   }
 }
 
-.characterImage{
+.characterImage {
   width: 100px;
   height: 100px;
   border-radius: 50%;
 }
 
-.characterName{
+.characterName {
   font-size: 24px;
   margin: 0;
   text-align: center;
   justify-content: center;
-  color: #FFE81F;
+  color: #ffe81f;
   text-transform: uppercase;
   letter-spacing: 2px;
   transform: perspective(300px) rotateX(40deg) translateZ(-20px);
@@ -198,15 +195,15 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px;
 }
 
 .cardCharacter:hover {
   transform: scale(1.5);
   transition: transform 0.3s ease;
+  z-index: 99999;
 }
 
-/* Media Queries para tablets y móviles */
+/* SOLO para móviles - NO sobreescribir las reglas principales */
 @media (max-width: 800px) {
   .gridContainer {
     grid-template-columns: repeat(1, 1fr);
@@ -226,7 +223,7 @@ a {
     height: 100vh;
   }
 
-  .cardTitle{
+  .cardTitle {
     text-align: center;
     width: 70%;
     justify-content: center;
@@ -238,15 +235,31 @@ a {
     justify-content: center;
   }
 
-  .card:hover .cardContent,
-  .card:active .cardContent,
-  .card:focus .cardContent {
+  /* MANTENER las mismas reglas de hover */
+  .card:hover .cardContent {
     animation: moveIn 40s linear forwards;
     opacity: 1;
   }
+  .cardContentContainer {
+    perspective: 800px;
+    transform-style: preserve-3d;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+  }
+  .cardContent {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    transform-origin: 50% 100%;
+    transition: opacity 0.3s ease;
+    z-index: 99999;
+  }
 }
 
-/* Tablet / pantallas medianas */
+/* Tablet / pantallas medianas - NO sobreescribir reglas de animación */
 @media (max-width: 1024px) {
   .gridContainer {
     width: 90vw;
@@ -268,16 +281,32 @@ a {
     font-size: 18px;
   }
 
-  /* Animación optimizada para tablets */
-  .card:hover .cardContent,
-  .card:active .cardContent,
-  .card:focus .cardContent {
+  /* MANTENER las mismas reglas de hover */
+  .card:hover .cardContent {
     animation: moveIn 40s linear forwards;
     opacity: 1;
   }
+  .cardContentContainer {
+    perspective: 800px;
+    transform-style: preserve-3d;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+  }
+  .cardContent {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    transform-origin: 50% 100%;
+    transition: opacity 0.3s ease;
+    z-index: 99999;
+
+  }
 }
 
-/* Móvil / pantallas pequeñas */
+/* Móvil / pantallas pequeñas - NO sobreescribir reglas de animación */
 @media (max-width: 600px) {
   .gridContainer {
     width: 100vw;
@@ -301,60 +330,71 @@ a {
     font-size: 16px;
   }
 
-  .card:hover .cardContent,
-  .card:active .cardContent,
-  .card:focus .cardContent {
+  /* MANTENER las mismas reglas de hover */
+  .card:hover .cardContent {
     animation: moveIn 40s linear forwards;
     opacity: 1;
   }
+  .cardContentContainer {
+    perspective: 800px;
+    transform-style: preserve-3d;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+  }
+  .cardContent {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    transform-origin: 50% 100%;
+    transition: opacity 0.3s ease;
+    z-index: 99999;
+
+  }
 }
 
-/* Media Queries específicos para dispositivos táctiles */
+/* Solo para dispositivos que NO soportan hover */
 @media (hover: none) {
   .card:active .cardContent,
   .card:focus .cardContent {
     animation: moveIn 40s linear forwards;
     opacity: 1;
   }
-  
+
   .card:active .image,
   .card:focus .image {
-    opacity: 0;
-  }
-  
-  .card {
-    cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  .cardContent {
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-}
-
-/* Optimización adicional para tablets */
-@media (max-width: 1024px) and (hover: none) {
-  .card:hover .cardContent,
-  .card:active .cardContent,
-  .card:focus .cardContent {
-    animation: moveIn 40s linear forwards;
     opacity: 1;
   }
-  
-  /* Animación más rápida para móviles si lo prefieres */
-  @keyframes moveInMobile {
-    0% {
-      transform: rotateX(20deg) translateZ(80px) translateY(100%);
-      opacity: 1;
-    }
-    100% {
-      transform: rotateX(20deg) translateZ(-300px) translateY(-150%);
-      opacity: 0.5;
-    }
+  .cardContentContainer {
+    perspective: 800px;
+    transform-style: preserve-3d;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
   }
-  
-  .card:active .cardContent,
-  .card:focus .cardContent {
-    animation: moveInMobile 30s linear forwards;
-  }}
+  .cardContent {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transform-origin: 50% 100%;
+    transition: opacity 0.3s ease;
+    z-index: 99999;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cardText{
+    width: 100%;
+  }
+
+  .cardTitle{
+    width: 100%;
+  }
+}
